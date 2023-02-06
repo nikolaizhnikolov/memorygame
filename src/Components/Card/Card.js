@@ -1,9 +1,9 @@
 import './card.css'
 
-const Card = ({ content, onclick }) => {
+const Card = ({ src, onclick }) => {
 
     return <div className='card' onClick={onclick}>
-            {content}
+            <img className='cardImg' src={src} alt=""/>
         </div>
 }
 

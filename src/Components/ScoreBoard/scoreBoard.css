@@ -1,0 +1,7 @@
+.scoreboard {
+    width: 200px;
+    text-align: center;
+    box-sizing: border-box;
+    border:solid thin black;
+    margin: 20px;
+}

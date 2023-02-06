@@ -5,9 +5,17 @@
 
     font-size: 4rem;
     text-align: center;
+    
+    display: flex;
+    justify-items: center;
+    align-items: center;
 }
 
 .card:hover {
     cursor: pointer;
     box-shadow: 0 0 3px 3px gray;
+}
+
+.cardImg {
+    width: 100%;
 }

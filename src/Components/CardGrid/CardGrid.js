@@ -1,6 +1,8 @@
 import { useState } from "react";
 import Card from "../Card/Card";
+import ScoreBoard from "../ScoreBoard/ScoreBoard";
 import './cardGrid.css';
+import storage from "../../assets/storage";
 
 
 const durstenfeldShuffle = (array) => {
@@ -12,33 +14,37 @@ const durstenfeldShuffle = (array) => {
 }
 
 const CardGrid = () => {
-    const [result, setResult] = useState(0);
+    const [highScore, setHighScore] = useState(0);
+    const [score, setScore] = useState(0);
     const [clickedCards, setClickedCards] = useState([]);
 
-    const evaluateResult = (event) => {
-        const key = event.target.key;
+    const evaluateResult = (key) => {
         console.log(key);
         if(clickedCards.includes(key)) {
-            // setMaxResult
+            if(score > highScore) {
+                setHighScore(score);
+            }
+            setScore(0);
             setClickedCards([]);
         } else {
             const clickedCardsCopy = clickedCards;
             clickedCardsCopy.push(key);
             setClickedCards(clickedCardsCopy);
+            setScore(score + 1)
         }
     }
     
-    const cardContent = durstenfeldShuffle([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
-    const cardElements = cardContent.map((card) => <Card content={card} key={card} onclick={evaluateResult}/>);
+    const cardContent = durstenfeldShuffle(storage);
+    const cardElements = cardContent.map((card) => 
+        <Card src={card.src} 
+            key={card.key}
+            onclick={() => evaluateResult(card.key)}/>);    
 
-
-    // cardElements.forEach((card) => {
-    //     card.addEventListener("click", () => evaluateResult(card.key));
-    // })
-    
-
-    return <div className="cardGrid">
-            {cardElements}
+    return <div>
+            <ScoreBoard highScore={highScore} score={score}/>
+            <div className="cardGrid">
+                {cardElements}
+            </div>            
         </div>;
 }
 
