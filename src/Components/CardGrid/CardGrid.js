@@ -19,7 +19,6 @@ const CardGrid = () => {
     const [clickedCards, setClickedCards] = useState([]);
 
     const evaluateResult = (key) => {
-        console.log(key);
         if(clickedCards.includes(key)) {
             if(score > highScore) {
                 setHighScore(score);
